@@ -45,7 +45,7 @@ function eleva() {
 
     var elevar = numero1 ** numero2;
 
-    resultado.innerHTML = `O resultado da multiplicação é ${elevar}`;
+    resultado.innerHTML = `O resultado da elevação é ${elevar}`;
 }
 
 
