@@ -1,0 +1,36 @@
+body {
+margin: 0;
+background-color: black;
+}
+
+div {
+display: flex;
+flex-direction: row;
+}
+
+h1 {
+color: white;
+font-family: arial;
+font-weight: 700;
+font-style: italic;
+}
+
+h2 {
+color: white;
+margin: 0;
+padding-right: 10px;
+font-family: verdana;
+font-weight: 400;
+}
+
+button {
+margin-left: 5px;
+}
+
+p {
+color: white;
+}
+
+input {
+background-color: white;
+}
