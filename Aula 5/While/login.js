@@ -1,18 +1,17 @@
 function logar() {
-    var nomeUsuario;
-    var senhaUsuario;
+    var nomeUsuario = document.getElementById("login").value;
+    var senhaUsuario = document.getElementById("senha").value;
 
     while(true) {
-
-        nomeUsuario = document.getElementById('login').value;
-        senhaUsuario = document.getElementById("senha").value;
 
         if(nomeUsuario === "1234" && senhaUsuario === "1234") {
             alert("Logado com sucesso!");
             break;
         }
-   
-        alert("Login ou senha inválido, tente novamente!")
-     
+
+        else {
+            alert("Login ou senha inválido, tente novamente!");
+            break;
+        }
     }
 }
