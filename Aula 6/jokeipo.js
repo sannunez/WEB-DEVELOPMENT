@@ -1,4 +1,3 @@
-
 function escolhaComp(){
     // Função que tem 3 valores
     const jokeipo = ["Pedra", "Papel", "Tesoura"]
