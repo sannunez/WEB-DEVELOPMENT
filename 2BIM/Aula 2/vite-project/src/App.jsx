@@ -2,8 +2,7 @@
 import Footer from "./componentes/Footer"
 import Header from "./componentes/Header"
 import MainInfo from "./componentes/mainInfo"
-
-
+import { Outlet } from "react-router-dom"
 
 
 function App() {
@@ -12,7 +11,8 @@ function App() {
   return (
     <>
     <Header/>
-    <MainInfo/>
+    {/* OUTLET --> onde o conteudo que será alterado na pagina ficará */}
+    <Outlet/>
     <Footer/>
     </>
     
