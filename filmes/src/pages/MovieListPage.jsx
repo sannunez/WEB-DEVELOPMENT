@@ -5,11 +5,14 @@ import MovieCard from '../components/MovieCard'
 export default function MovieListPage(){
 
     const [search, setSearch] = useState("")
-    const[filmes, setFilmes] = useState([])
+    const[filmes, setFilmes] = useState([]);
+    const[isLoading, setIsLoading] = useState(false)
 
     
     // useEffect -> controla "efeitos colaterais"
     useEffect(() => {
+        setIsLoading(true)
+        setTimeout(()=> {
          // fetch API
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=7c572a9f5b3ba776080330d23bb76e1e&language=pt-BR')
         // Promessa concluida --> Então - .then()
@@ -19,7 +22,8 @@ export default function MovieListPage(){
             .then(res => setFilmes(res.results))
             .catch(erro => console.log(erro))
             // Operação quando fetch acabar
-            .finally (() => console.log('Fim!'))
+            .finally (() => setIsLoading(false))
+        }, 5000)
     // array de dependencias, utilizado para atualização de informações
     // array vazio faz uma vez, porém tem como configurar a atualização de estado que acarreta no fetch novamente
     }, [])
@@ -32,11 +36,11 @@ export default function MovieListPage(){
         console.log(search)
     }
 
-    // const filmesFiltrados = movies.filter( filme => (
-    //     // includes verifica se possue o paramatro passado nesse caso
-    //     // o texto dentro da caixa de input
-    //     filme.titulo.toLowerCase().includes(search.toLowerCase())
-    // ))
+    const filmesFiltrados = filmes.filter( filme => (
+        // includes verifica se possue o paramatro passado nesse caso
+        // o texto dentro da caixa de input
+        filme.title.toLowerCase().includes(search.toLowerCase())
+    ))
     
     return(
         <>
@@ -48,36 +52,29 @@ export default function MovieListPage(){
             id="search"
             value = {search}
             // quando munda o estado, ativa a função
-            onChange = {handleSearch}/>
+            onChange = {handleSearch}
+            />
 
-            <section className='flex'>
-             {
-                filmes.map(filme => (
-                    <>
-                        <h1>{filme.title}</h1>
-                        <img src={`https://image.tmdb.org/t/p/w92${filme.poster_path}`}/>
-                        <img src={`https://image.tmdb.org/t/p/w1280${filme.backdrop_path}`}/>
-                    </>
+             <section className='flex'>
+                {
+                    isLoading ? 
+                    <h1>carregando...</h1>
+
+                    :
+
+                filmesFiltrados.length > 0 ?
+                filmesFiltrados
+                .map( filme => (
+                    // spread '...' passa uma cópia de cada elemento do array da descrição de cada filme
+                    // para esse moviecard cada vez que o map passa por um elemento(filme)
+
+                    // key -> identificador 
+                    <MovieCard key={filme.id} {...filme}/>
                 ))
-             }
-             </section>
+                    :
+                    <p>filme inexistente seu comédia!!!</p>
+                }
+            </section>
         </>
     )
 }
-
-// FILTRAGEM
-{/* <section className='flex'>
-{
-   filmesFiltrados.length > 0 ?
-   filmesFiltrados
-   .map( filme => (
-       // spread '...' passa uma cópia de cada elemento do array da descrição de cada filme
-       // para esse moviecard cada vez que o map passa por um elemento(filme)
-
-       // key -> identificador 
-       <MovieCard key={filme.id} {...filme}/>
-   ))
-       :
-       <p>filme inexistente seu comédia!!!</p>
-}
-</section> */}
