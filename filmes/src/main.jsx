@@ -10,6 +10,7 @@ import MovieListPage from './pages/MovieListPage.jsx'
 import MoviesByGenrePage from './pages/MoviesByGenrePage.jsx'
 import PageNotFound from './pages/PageNotFound.jsx'
 import Contato from './pages/Contato.jsx'
+import 'dotenv/config'
 
 const router = createBrowserRouter([
   {
